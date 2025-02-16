@@ -4,14 +4,8 @@ Welcome to Rental System! This project provides a seamless and intuitive platfor
 
 ---
 
-## 👨‍💻 About The Team  
-
-- **Lawrence Al-khalaileh**: Scrum Master  
-- **Mohammed Alhmoud**: Product Owner
-- **Hasan Mansour**: QA Specialist  
-- **Hareth Aljundi**: Developer  
-- **Rana Salameh**: Developer
-- **Marya Benyan**: Developer
+## 👨‍💻 About Me  
+I'm Hasan Omar Hasan Mansour, a passionate MERN-Stack Developer & Java Developer. I love building innovative web applications that deliver seamless user experiences.
 
 ---
 
