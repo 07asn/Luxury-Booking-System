@@ -1,3 +1,4 @@
+/*--------------------> IMPORTS <--------------------*/
 import React, { useState, useEffect } from "react";
 import { FaBars } from "react-icons/fa";
 import { useSelector } from "react-redux";
@@ -23,10 +24,12 @@ import {
 } from "./service/PropertyService";
 import { subscribeToBookings, updateBookingStatus } from "./service/BookingService";
 import { subscribeToReviews } from "./service/ReviewService";
-
 import { database } from "../../fireBaseConfig";
+/*--------------------> IMPORTS <--------------------*/
+
 
 export default function SellerDash() {
+  /*--------------------> NAVIGATION & AUTHENTICATION <--------------------*/
   const navigate = useNavigate();
   const user = useSelector((state) => state.auth.user);
 
@@ -35,7 +38,11 @@ export default function SellerDash() {
       navigate("/login");
     }
   }, [user, navigate]);
+  /*--------------------> NAVIGATION & AUTHENTICATION <--------------------*/
 
+
+
+  /*--------------------> COMPONENT STATE <--------------------*/
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [properties, setProperties] = useState([]);
   const [bookings, setBookings] = useState([]);
@@ -44,14 +51,20 @@ export default function SellerDash() {
   const [selectedProperty, setSelectedProperty] = useState(null);
   const [alertMessage, setAlertMessage] = useState("");
   const [showAlert, setShowAlert] = useState(false);
+  /*--------------------> COMPONENT STATE <--------------------*/
 
-  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
-  // Helper function to send a notification to Firebase.
+  
+  /*--------------------> Notification <--------------------*/
   const sendNotification = async (notification) => {
     const notificationsRef = ref(database, "notification");
     return push(notificationsRef, notification);
   };
+  /*--------------------> Notification <--------------------*/
+
+
+
+  /*--------------------> SUBSCRIPTIONS  <--------------------*/
 
   // Subscribe to seller properties.
   useEffect(() => {
@@ -64,6 +77,7 @@ export default function SellerDash() {
     }
   }, [user]);
 
+
   // Subscribe to bookings.
   useEffect(() => {
     const unsubscribe = subscribeToBookings((allBookings) => {
@@ -74,6 +88,7 @@ export default function SellerDash() {
     });
     return () => unsubscribe();
   }, [properties]);
+
 
   // Subscribe to reviews.
   useEffect(() => {
@@ -89,21 +104,29 @@ export default function SellerDash() {
     });
     return () => unsubscribeReviews();
   }, [properties]);
+  /*--------------------> SUBSCRIPTIONS  <--------------------*/
 
+
+
+/*--------------------> EVENT HANDLERS <--------------------*/
+  // Remove a property.
   const handleRemoveProperty = async (propertyId) => {
     await softDeleteProperty(propertyId);
   };
 
+  // Open the deposit modal.
   const openDepositModal = (property) => {
     setSelectedProperty(property);
     setIsDepositModalOpen(true);
   };
 
+  // Close the deposit modal.
   const closeDepositModal = () => {
     setIsDepositModalOpen(false);
     setSelectedProperty(null);
   };
 
+  // Handle deposit request submission.
   const handleDepositRequest = async (message) => {
     if (!selectedProperty) return;
     try {
@@ -114,8 +137,7 @@ export default function SellerDash() {
     }
   };
 
-  // Handle booking actions with conflict checking.
-  // When approving a booking, also push a notification into Firebase.
+  // Handle booking actions with conflict.
   const handleBookingAction = async (bookingId, newStatus) => {
     try {
       if (newStatus.toLowerCase() === "approved") {
@@ -166,7 +188,6 @@ export default function SellerDash() {
       console.log(`Booking ${bookingId} updated to ${newStatus}`);
 
       // Send notification to Firebase.
-      // Map booking status to notification status and message.
       let notificationStatus, notificationMessage;
       if (newStatus.toLowerCase() === "approved") {
         notificationStatus = "approve";
@@ -178,7 +199,7 @@ export default function SellerDash() {
         notificationStatus = newStatus.toLowerCase();
         notificationMessage = "Your request is pending approval.";
       }
-      // Assume the booking object contains a userId.
+      // Notification object
       const booking = bookings.find((b) => b.id === bookingId);
       if (booking && booking.userId) {
         await sendNotification({
@@ -194,7 +215,7 @@ export default function SellerDash() {
     }
   };
 
-  // Toggle blocked date for a property.
+  // Toggle blocked date.
   const handleToggleBlockedDate = async (propertyId, dateStr) => {
     const property = properties.find((p) => p.id === propertyId);
     if (!property) {
@@ -219,7 +240,7 @@ export default function SellerDash() {
       console.error("Error updating blocked dates:", error);
     }
   };
-
+  /*--------------------> EVENT HANDLERS <--------------------*/
   return (
     <div className="relative flex min-h-screen bg-gray-50">
       <button

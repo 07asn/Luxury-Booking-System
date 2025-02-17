@@ -1,17 +1,23 @@
+/*--------------------> IMPORTS <--------------------*/
 import React, { useState, useEffect, useRef } from "react";
 import { FaTimes, FaArrowLeft, FaEnvelope, FaPhone } from "react-icons/fa";
 import { ref, onValue } from "firebase/database";
 import { database } from "../../../fireBaseConfig";
-
 const defaultAvatar = "https://random.imagecdn.app/500/150";
+/*--------------------> IMPORTS <--------------------*/
+
 
 export default function GuestDetailsModal({ guest, booking, propertyPhoto: propPhoto, onCloseAll, onBack }) {
+
+/*--------------------> STATE <--------------------*/
   const [isExiting, setIsExiting] = useState(false);
   const [propertyPhoto, setPropertyPhoto] = useState(propPhoto || null);
   const [userData, setUserData] = useState({ email: "", avatar: "", phone: "" });
   const modalRef = useRef(null);
+/*--------------------> STATE <--------------------*/
 
-  // Fetch property photo if not provided.
+
+/*--------------------> FETCH PROPERTY PHOTO FROM FIREBASE <--------------------*/
   useEffect(() => {
     if (!propertyPhoto && booking?.productId) {
       const productRef = ref(database, `products/${booking.productId}`);
@@ -26,7 +32,10 @@ export default function GuestDetailsModal({ guest, booking, propertyPhoto: propP
       return () => unsubscribe();
     }
   }, [booking, propertyPhoto]);
+/*--------------------> FETCH PROPERTY PHOTO FROM FIREBASE <--------------------*/
 
+
+/*--------------------> FETCH GUEST USER DATA <--------------------*/
   // Fetch guest user data using booking.userId.
   useEffect(() => {
     if (booking?.userId) {
@@ -48,16 +57,21 @@ export default function GuestDetailsModal({ guest, booking, propertyPhoto: propP
       console.log("No booking.userId provided.");
     }
   }, [booking?.userId]);
+/*--------------------> FETCH GUEST USER DATA <--------------------*/
 
+
+/*--------------------> Animation <--------------------*/
   useEffect(() => {
     if (modalRef.current) {
       modalRef.current.classList.remove("opacity-0", "translate-y-4");
       modalRef.current.classList.add("opacity-100", "translate-y-0");
     }
   }, []);
+/*--------------------> Animation <--------------------*/
 
   if (!guest) return null;
 
+/*--------------------> EXIT & CLOSE HANDLERS <--------------------*/
   const handleBack = () => {
     setIsExiting(true);
     setTimeout(() => onBack?.(), 300);
@@ -67,11 +81,14 @@ export default function GuestDetailsModal({ guest, booking, propertyPhoto: propP
     setIsExiting(true);
     setTimeout(() => onCloseAll?.(), 300);
   };
+/*--------------------> EXIT & CLOSE HANDLERS <--------------------*/
 
-  // Use guest prop first, then fallback to fetched userData.
+
+/*--------------------> DISPLAY GUEST INFO <--------------------*/
   const displayEmail = guest.email || userData.email || "Not provided";
   const displayAvatar = guest.avatar || userData.avatar || defaultAvatar;
   const displayPhone = guest.phone || userData.phone || "Not provided";
+/*--------------------> DISPLAY GUEST INFO <--------------------*/
 
   return (
     <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-gray-900/50 backdrop-blur-sm">

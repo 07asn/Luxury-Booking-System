@@ -1,14 +1,18 @@
+/*--------------------> IMPORTS <--------------------*/
 import React, { useState } from "react";
 import { 
   FaClipboardList, 
   FaCheck, 
   FaTimes, 
   FaFilter, 
-  FaRegCalendarTimes 
 } from "react-icons/fa";
 import BookingWizard from "../modals/BookingWizard";
+/*--------------------> IMPORTS <--------------------*/
+
 
 export default function BookingsSection({ bookings, properties, onBookingAction }) {
+
+  /*--------------------> STATE <--------------------*/
   const [selectedBooking, setSelectedBooking] = useState(null);
   const [showWizard, setShowWizard] = useState(false);
   
@@ -18,7 +22,10 @@ export default function BookingsSection({ bookings, properties, onBookingAction 
 
   // Number of bookings to display initially
   const [visibleCount, setVisibleCount] = useState(5);
+  /*--------------------> STATE <--------------------*/
 
+
+  /*--------------------> EVENT HANDLERS <--------------------*/
   const handleRowClick = (booking) => {
     setSelectedBooking(booking);
     setShowWizard(true);
@@ -34,12 +41,15 @@ export default function BookingsSection({ bookings, properties, onBookingAction 
     return prop ? prop.title : "Unknown Property";
   };
 
-  // Filter bookings based on property and status filters.
+
+
+// Filters Bookings Based on :  propertyFilter   , statusFilter 
   const filteredBookings = bookings.filter((b) => {
     const matchProperty = !propertyFilter || b.productId === propertyFilter;
     const matchStatus = !statusFilter || b.status.toLowerCase() === statusFilter.toLowerCase();
     return matchProperty && matchStatus;
   });
+
 
   // Only show a subset initially.
   const displayedBookings = filteredBookings.slice(0, visibleCount);
@@ -53,6 +63,7 @@ export default function BookingsSection({ bookings, properties, onBookingAction 
   const handleViewMore = () => {
     setVisibleCount(visibleCount + 5);
   };
+/*--------------------> EVENT HANDLERS <--------------------*/
 
   return (
     <section className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden container mx-auto px-4 py-8">

@@ -1,4 +1,3 @@
-// src/components/seller_dash/AlertModal.jsx
 import React from "react";
 
 export default function AlertModal({ message, onClose }) {

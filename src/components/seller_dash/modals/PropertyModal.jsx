@@ -1,3 +1,4 @@
+/*--------------------> IMPORTS <--------------------*/
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import {
@@ -9,16 +10,18 @@ import {
   FaEdit,
 } from "react-icons/fa";
 import dayjs from "dayjs";
-
 import { createProperty, updateProperty } from "../service/PropertyService.js";
+/*--------------------> IMPORTS <--------------------*/
 
 const defaultBookingIcon = "https://random.imagecdn.app/500/150";
 
 export default function PropertyModal({ property, onClose, onSave }) {
+
   // Get the current user from Redux.
   const user = useSelector((state) => state.auth.user);
 
-  // Use one date input field.
+
+/*--------------------> STATE <--------------------*/
   const [formData, setFormData] = useState({
     title: "",
     location: "",
@@ -26,50 +29,63 @@ export default function PropertyModal({ property, onClose, onSave }) {
     bedrooms: "",
     area: "",
     category: "",
-    date: "", // in YYYY-MM-DD format from input
+    date: "",
     price: 0,
     photos: [],
     description: "",
     seller: user ? user.uid : "",
   });
+/*--------------------> STATE <--------------------*/
 
-  const modalRef = useRef(null);
 
-  // Animate the modal entrance.
+/*--------------------> Animation <--------------------*/
+  const modalRef = useRef(null); //  Stop Causing Re-renders.
+
   useEffect(() => {
     if (modalRef.current) {
       modalRef.current.classList.remove("opacity-0", "translate-y-8");
       modalRef.current.classList.add("opacity-100", "translate-y-0");
     }
   }, []);
+/*--------------------> Animation <--------------------*/
 
-  // When editing, load property data.
+
+/*--------------------> Load Property Data When Update <--------------------*/
   useEffect(() => {
     if (property) {
       setFormData({
-        title: property.title || "",
-        location: property.location || "",
+        title: property.title               || "",
+        location: property.location         || "",
         neighborhood: property.neighborhood || "",
-        bedrooms: property.bedrooms || "",
-        area: property.area || "",
-        category: property.category || "",
-        // For editing, assume the stored date is already in the "YYYY-MM-DD" format.
-        date: property.date || "",
-        price: property.price || 0,
-        photos: property.photos || [],
-        description: property.description || "",
-        seller: property.seller || (user ? user.uid : ""),
+        bedrooms: property.bedrooms         || "",
+        area: property.area                 || "",
+        category: property.category         || "",
+        date: property.date                 || "",
+        price: property.price               || 0,
+        photos: property.photos             || [],
+        description: property.description   || "",
+        seller: property.seller             || (user ? user.uid : ""),
       });
     }
   }, [property, user]);
+/*--------------------> Load Property Data When Update <--------------------*/
 
-  // Ensure seller is set for new properties if user is available.
+
+/**
+ * property	  user	    What Happens?
+    null    	Exists	  Set seller = user.uid     (New already has a seller)
+    Exists 	  Exists	  Do nothing                (editing already has a seller)
+    null	    null	    Do nothing                (user not logged in)
+
+ */
   useEffect(() => {
     if (!property && user) {
       setFormData((prev) => ({ ...prev, seller: user.uid }));
     }
   }, [user, property]);
 
+
+/*--------------------> EVENT HANDLERS <--------------------*/
   const handleAddImage = () => {
     const url = prompt("Enter image URL:");
     if (url) {
@@ -92,7 +108,7 @@ export default function PropertyModal({ property, onClose, onSave }) {
     try {
       const dataToSave = { ...formData };
       if (dataToSave.date) {
-        // Convert the selected date into "YYYY-MM-DD" format
+        // Convert date into "YYYY-MM-DD" format
         dataToSave.date = dayjs(dataToSave.date).format("YYYY-MM-DD");
       }
       // Save data: update if editing, create if new.
@@ -107,6 +123,8 @@ export default function PropertyModal({ property, onClose, onSave }) {
       console.error("Error saving property:", error);
     }
   };
+/*--------------------> EVENT HANDLERS <--------------------*/
+
 
   return (
     <div className="fixed inset-0 z-50 bg-gray-900/50 backdrop-blur-xl overflow-y-auto">

@@ -1,17 +1,24 @@
+/*--------------------> IMPORTS <--------------------*/
 import React, { useState, useEffect } from "react";
 import { FaTimes, FaPaperPlane } from "react-icons/fa";
+/*--------------------> IMPORTS <--------------------*/
 
-/**
- * DepositRequestModal Component
- * A modern, full-screen modal where sellers can request a review for rejected properties.
- */
+
 export default function DepositRequestModal({ isOpen, onClose, onSubmit, propertyTitle }) {
-  const [message, setMessage] = useState("");
 
+  /*--------------------> STATE <--------------------*/
+  const [message, setMessage] = useState("");
+  /*--------------------> STATE <--------------------*/
+
+
+  /*--------------------> DISABLE SCROLL <--------------------*/
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "auto";
   }, [isOpen]);
+  /*--------------------> DISABLE SCROLL <--------------------*/
 
+
+  /*-------------------->  HANDLERS <--------------------*/
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!message.trim()) {
@@ -25,7 +32,9 @@ export default function DepositRequestModal({ isOpen, onClose, onSubmit, propert
   };
 
   if (!isOpen) return null;
+  /*-------------------->  HANDLERS <--------------------*/
 
+  
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/70 backdrop-blur-sm z-50">
       <div className="relative w-full max-w-lg bg-white rounded-2xl shadow-2xl p-8 transform transition-all duration-300 animate-slide-in">

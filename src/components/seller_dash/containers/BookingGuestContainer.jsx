@@ -1,15 +1,21 @@
+/*--------------------> IMPORTS <--------------------*/
 import React, { useState, useEffect } from "react";
 import { ref, onValue } from "firebase/database";
 import { database } from "../../fireBaseConfig";
 import BookingDetailsModal from "../modals/BookingDetailsModal";
 import GuestDetailsModal from "../modals/GuestDetailsModal";
+/*--------------------> IMPORTS <--------------------*/
 
 export default function BookingGuestContainer({ bookingId }) {
+/*--------------------> STATE <--------------------*/
   const [bookingData, setBookingData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [showBookingModal, setShowBookingModal] = useState(true);
   const [showGuestModal, setShowGuestModal] = useState(false);
+/*--------------------> STATE <--------------------*/
 
+
+/*--------------------> FETCH BOOKING DATA FROM FIREBASE <--------------------*/
   useEffect(() => {
     const bookingRef = ref(database, `formData/${bookingId}`);
     const unsubscribe = onValue(bookingRef, (snapshot) => {
@@ -19,6 +25,10 @@ export default function BookingGuestContainer({ bookingId }) {
     });
     return () => unsubscribe();
   }, [bookingId]);
+/*--------------------> FETCH BOOKING DATA FROM FIREBASE <--------------------*/
+
+
+/*--------------------> Handlers <--------------------*/
 
   const openGuestModal = () => {
     setShowBookingModal(false);
@@ -29,12 +39,16 @@ export default function BookingGuestContainer({ bookingId }) {
     setShowBookingModal(false);
     setShowGuestModal(false);
   };
+/*--------------------> Handlers <--------------------*/
 
+
+/*--------------------> CONDITIONAL RENDERING <--------------------*/
   if (loading) {
     return <div>Loading booking details...</div>;
   }
 
   if (!bookingData) return <div>No booking found.</div>;
+/*--------------------> CONDITIONAL RENDERING <--------------------*/
 
   return (
     <>

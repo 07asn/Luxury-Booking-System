@@ -16,7 +16,15 @@ export async function softDeleteProperty(propertyId) {
 
 export function subscribeToPropertiesBySeller(sellerId, callback) {
   const propertiesRef = ref(database, "products");
+
+  /**
+   * 1) Tells Firebase to sort the data by the seller field.
+   * 2) Filters the sorted so only properties equals the provided sellerId.
+   * 3) Store properties associated with the specified seller
+   */
   const q = query(propertiesRef, orderByChild("seller"), equalTo(sellerId));
+
+
   return onValue(q, (snapshot) => {
     const data = snapshot.val();
     if (data) {
@@ -40,7 +48,6 @@ export async function updateBlockedDates(propertyId, blockedDates) {
   return update(ref(database, `products/${propertyId}`), { blockedDates });
 }
 
-// New: Update the bookedDate field for a product (an array of approved ranges)
 export async function updateProductBookedDates(propertyId, bookedDates) {
   return update(ref(database, `products/${propertyId}`), { bookedDate: bookedDates });
 }

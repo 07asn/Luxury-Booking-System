@@ -1,24 +1,35 @@
+/*--------------------> IMPORTS <--------------------*/
 import React, { useState, useMemo } from "react";
 import { FaStar, FaRegCommentDots, FaRegBuilding } from "react-icons/fa";
+/*--------------------> IMPORTS <--------------------*/
 
 export default function ReviewsSection({ reviews = [], properties = [] }) {
-  const [propertyFilter, setPropertyFilter] = useState("");
 
+/*--------------------> STATE <--------------------*/
+  const [propertyFilter, setPropertyFilter] = useState("");
+/*--------------------> STATE <--------------------*/
+
+
+/*--------------------> Filters & Fetched <--------------------*/
+// Get Property Name by ID
   const getPropertyName = (propertyId) => {
     const prop = properties.find((p) => p.id.toString() === propertyId.toString());
     return prop ? prop.title : "Unknown Property";
   };
 
+  // Get Reviews for Selected Property
   const filteredReviews = useMemo(() => {
     if (!propertyFilter) return reviews;
     return reviews.filter((review) => review.productId.toString() === propertyFilter.toString());
   }, [reviews, propertyFilter]);
 
+  // Calculate AVG Rating
   const averageRating = useMemo(() => {
     if (filteredReviews.length === 0) return 0;
     const totalRating = filteredReviews.reduce((acc, review) => acc + (Number(review.rate) || 0), 0);
     return totalRating / filteredReviews.length;
   }, [filteredReviews]);
+/*--------------------> Filters & Fetched <--------------------*/
 
   return (
     <section className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden container mx-auto px-4 py-8">

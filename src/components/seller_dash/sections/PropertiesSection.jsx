@@ -1,3 +1,4 @@
+/*--------------------> IMPORTS <--------------------*/
 import React, { useState, useMemo } from "react";
 import { 
   FaPlus, 
@@ -11,14 +12,11 @@ import {
 } from "react-icons/fa";
 import PropertyModal from "../modals/PropertyModal";
 import RejectedPropertyCard from "../containers/RejectedPropertyCard";
+/*--------------------> IMPORTS <--------------------*/
 
-export default function PropertiesSection({
-  properties,
-  onAddProperty,
-  onEditProperty,
-  onRemoveProperty,
-  onOpenDepositModal,
-}) {
+export default function PropertiesSection({ properties, onAddProperty, onEditProperty, onRemoveProperty, onOpenDepositModal,}) {
+
+/*--------------------> STATE <--------------------*/
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingProperty, setEditingProperty] = useState(null);
 
@@ -30,7 +28,10 @@ export default function PropertiesSection({
     ],
     [properties]
   );
+/*--------------------> STATE <--------------------*/
 
+
+/*--------------------> EVENT HANDLERS <--------------------*/
   const openModal = (prop = null) => {
     setEditingProperty(prop);
     setIsModalOpen(true);
@@ -51,11 +52,15 @@ export default function PropertiesSection({
     pending: FaClock,
     rejected: FaTimesCircle
   };
+/*--------------------> EVENT HANDLERS <--------------------*/
 
+
+/*--------------------> Property UI <--------------------*/
   const UniquePropertyCard = ({ property }) => {
     const hasPhotos = property.photos?.length > 0;
     const StatusIcon = statusIcons[property.status.toLowerCase()] || FaCheckCircle;
-    
+/*--------------------> Property UI <--------------------*/
+
     return (
       <div className="group relative overflow-hidden rounded-2xl shadow-lg transition-all duration-300 hover:shadow-xl ">
         {/* Image Section */}

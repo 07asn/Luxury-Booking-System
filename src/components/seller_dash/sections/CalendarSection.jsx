@@ -1,29 +1,38 @@
+/*--------------------> IMPORTS <--------------------*/
 import React, { useState, useMemo } from "react";
 import dayjs from "dayjs";
 import { FaCalendarAlt, FaChevronLeft, FaChevronRight, FaHome } from "react-icons/fa";
+/*--------------------> IMPORTS <--------------------*/
+
 
 const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 export default function CalendarSection({ bookings, properties, onToggleBlockedDate }) {
+
+/*--------------------> STATE <--------------------*/
   const [selectedProperty, setSelectedProperty] = useState("");
   const [currentDate, setCurrentDate] = useState(dayjs());
 
-  // When properties change, select the first property's id.
+  // Fist Value for filter selecting.
   React.useEffect(() => {
     if (properties && properties.length > 0) {
       setSelectedProperty(properties[0].id);
     }
   }, [properties]);
 
-  // State for the block/unblock modal.
+  // block/unblock modal.
   const [selectedDate, setSelectedDate] = useState(null);
   const [blockModalOpen, setBlockModalOpen] = useState(false);
+/*--------------------> STATE <--------------------*/
 
-  // Get the selected property object and its blocked dates.
+
+/*--------------------> DERIVED DATA & MEMOIZED VALUES <--------------------*/
+  // Select:    Property Object + Blocked Dates.
   const selectedPropertyObj = properties.find(p => p.id === selectedProperty);
   const propertyBlocked = selectedPropertyObj?.blockedDates || [];
 
-  // Compute booked dates from the product’s approved booking ranges.
+
+  // Computing: Booked Dates Ranges.
   const bookedDates = useMemo(() => {
     let dates = [];
     if (selectedPropertyObj && selectedPropertyObj.bookedDate) {
@@ -50,7 +59,11 @@ export default function CalendarSection({ bookings, properties, onToggleBlockedD
     }
     return matrix;
   }, [currentDate]);
+/*--------------------> DERIVED DATA & MEMOIZED VALUES <--------------------*/
 
+
+
+/*--------------------> EVENT HANDLERS <--------------------*/
   const goToPrevMonth = () => setCurrentDate(prev => prev.subtract(1, "month"));
   const goToNextMonth = () => setCurrentDate(prev => prev.add(1, "month"));
 
@@ -79,6 +92,8 @@ export default function CalendarSection({ bookings, properties, onToggleBlockedD
     }
     closeBlockModal();
   };
+/*--------------------> EVENT HANDLERS <--------------------*/
+
 
   return (
     <section className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden relative container mx-auto px-4 py-8">

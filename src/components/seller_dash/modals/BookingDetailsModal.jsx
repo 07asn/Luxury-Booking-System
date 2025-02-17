@@ -1,15 +1,21 @@
+/*--------------------> IMPORTS <--------------------*/
 import React, { useState, useEffect, useRef } from "react";
 import { FaTimes, FaArrowRight, FaCalendarAlt, FaUser, FaUserFriends } from "react-icons/fa";
 import { ref, onValue } from "firebase/database";
 import { database } from "../../../fireBaseConfig";
-
 const defaultBookingIcon = "https://random.imagecdn.app/500/150";
+/*--------------------> IMPORTS <--------------------*/
 
 export default function BookingDetailsModal({ booking, onClose, onForward }) {
+
+/*--------------------> STATE <--------------------*/
   const [isExiting, setIsExiting] = useState(false);
   const [propertyPhoto, setPropertyPhoto] = useState(null);
   const modalRef = useRef(null);
+/*--------------------> STATE <--------------------*/
 
+
+/*--------------------> Property Photo <--------------------*/
   // Fetch property photo from Firebase using booking.productId.
   useEffect(() => {
     if (booking && booking.productId) {
@@ -23,28 +29,41 @@ export default function BookingDetailsModal({ booking, onClose, onForward }) {
       return () => unsubscribe();
     }
   }, [booking]);
+/*--------------------> Property Photo <--------------------*/
 
+
+/*--------------------> Anamation <--------------------*/
   useEffect(() => {
     if (modalRef.current) {
       modalRef.current.classList.remove("opacity-0", "translate-y-4");
       modalRef.current.classList.add("opacity-100", "translate-y-0");
     }
   }, []);
+/*--------------------> Anamation <--------------------*/
 
+
+//--------------------> CONDITIONAL RENDERING <--------------------//
   if (!booking) return null;
+//--------------------> CONDITIONAL RENDERING <--------------------//
 
+
+//--------------------> EXIT & CLOSE HANDLERS <--------------------//
   const goForward = () => {
     setIsExiting(true);
     setTimeout(() => onForward?.(), 300);
   };
 
   const closeAll = () => onClose?.();
+//--------------------> EXIT & CLOSE HANDLERS <--------------------//
 
+
+//--------------------> STATUS COLORS (DYNAMIC STYLING) <--------------------//
   const statusColor = {
     approved: { bg: "bg-emerald-100", text: "text-emerald-800", border: "border-emerald-200" },
     pending: { bg: "bg-amber-100", text: "text-amber-800", border: "border-amber-200" },
     declined: { bg: "bg-rose-100", text: "text-rose-800", border: "border-rose-200" }
   }[booking.status.toLowerCase()] || { bg: "bg-gray-100", text: "text-gray-800", border: "border-gray-200" };
+//--------------------> STATUS COLORS (DYNAMIC STYLING) <--------------------//
 
   return (
     <div className="fixed inset-0 z-[9998] flex items-center justify-center bg-gray-900/50 backdrop-blur-sm">

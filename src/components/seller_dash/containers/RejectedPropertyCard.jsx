@@ -1,5 +1,7 @@
+/*--------------------> IMPORTS <--------------------*/
 import React from "react";
 import { FaRegImage, FaTrash, FaEdit, FaExclamationTriangle } from "react-icons/fa";
+/*--------------------> IMPORTS <--------------------*/
 
 export default function RejectedPropertyCard({
   property,
@@ -7,8 +9,12 @@ export default function RejectedPropertyCard({
   onRemove,
   onOpenDepositModal,
 }) {
+
+/*--------------------> SET PROPERTY PHOTOS <--------------------*/
   const hasPhotos = property.photos?.length > 0;
   const imageUrl = hasPhotos ? property.photos[0] : null;
+/*--------------------> SET PROPERTY PHOTOS <--------------------*/
+
 
   return (
     <div className="group rounded-2xl overflow-hidden shadow-lg transform transition duration-300 ">
