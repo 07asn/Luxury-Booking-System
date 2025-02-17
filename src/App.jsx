@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createHashRouter, RouterProvider } from "react-router-dom";
 import {
   Home,
   Login,
@@ -18,7 +18,7 @@ import {
 } from "./components";
 function App() {
 
-  const router = createBrowserRouter([
+  const router = createHashRouter([
     {
       path: '/',
       element: <Home />,
@@ -80,7 +80,7 @@ function App() {
 
   return (
     <>
-      <RouterProvider router={router} />
+      <RouterProvider router={router}/>
 
     </>
   )
