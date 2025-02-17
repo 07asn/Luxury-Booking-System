@@ -80,7 +80,7 @@ function App() {
 
   return (
     <>
-      <RouterProvider router={router} basename={import.meta.env.BASE_URL}/>
+      <RouterProvider router={router} />
 
     </>
   )
