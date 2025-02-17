@@ -12,7 +12,7 @@ import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <Provider store={store} basename={import.meta.env.BASE_URL}>
+    <Provider store={store}>
       <App />
     </Provider>
   </React.StrictMode>
