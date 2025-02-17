@@ -1,4 +1,4 @@
-import { createHashRouter, RouterProvider } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import {
   Home,
   Login,
@@ -16,74 +16,28 @@ import {
   BecomeOwnerProfile,
   SellerObjection,
 } from "./components";
+
 function App() {
-
-  const router = createHashRouter([
-    {
-      path: '/',
-      element: <Home />,
-      errorElement: <PageNotFound />
-    },
-    {
-      path: '/login',
-      element: <Login />,
-    },
-    {
-      path: '/Register',
-      element: <Register />,
-    },
-    {
-      path: '/AdminDash',
-      element: <AdminDash />,
-    },
-    {
-      path: '/SellerDash',
-      element: <SellerDash />,
-    },
-    {
-      path: '/Rentals',
-      element: <Rentals />,
-    },
-    {
-      path: '/PropertyDetails/:id',
-      element: <PropertyDetails />,
-    },
-    {
-      path: '/Checkout',
-      element: <Checkout />,
-    },
-    {
-      path: '/Wishlist',
-      element: <Wishlist />,
-    },
-    {
-      path: '/UserProfile',
-      element: <UserProfile />,
-    },
-    {
-      path: '/About',
-      element: <About />,
-    },
-    {
-      path: '/support',
-      element: <Contact />,
-    },
-    {
-      path: '/BecomeOwnerProfile',
-      element: <BecomeOwnerProfile />,
-    },
-    {
-      path: '/sellerObjection',
-      element: <SellerObjection />,
-    }
-  ])
-
   return (
-    <>
-      <RouterProvider router={router} />
-
-    </>
-  )
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/Register" element={<Register />} />
+      <Route path="/AdminDash" element={<AdminDash />} />
+      <Route path="/SellerDash" element={<SellerDash />} />
+      <Route path="/Rentals" element={<Rentals />} />
+      <Route path="/PropertyDetails/:id" element={<PropertyDetails />} />
+      <Route path="/Checkout" element={<Checkout />} />
+      <Route path="/Wishlist" element={<Wishlist />} />
+      <Route path="/UserProfile" element={<UserProfile />} />
+      <Route path="/About" element={<About />} />
+      <Route path="/support" element={<Contact />} />
+      <Route path="/BecomeOwnerProfile" element={<BecomeOwnerProfile />} />
+      <Route path="/sellerObjection" element={<SellerObjection />} />
+      {/* Fallback route for unknown paths */}
+      <Route path="*" element={<PageNotFound />} />
+    </Routes>
+  );
 }
 
-export default App
+export default App;
