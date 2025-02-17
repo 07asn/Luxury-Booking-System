@@ -2,6 +2,7 @@
   "name": "rent-app",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://07asn.github.io/Luxury-Booking-System/",
   "type": "module",
   "scripts": {
     "dev": "vite",
