@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import {
+import { 
   Home,
   Login,
   Register,
