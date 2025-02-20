@@ -56,4 +56,34 @@ Explore the wireframes and mockups for the project design on Figma:
 Track project progress and tasks on Trello:  
 👉 [Trello Board](https://trello.com/b/RIH7SYpI/rental-website)
 
+---
 
+## 🖼️ Project Preview  
+Below are some screenshots from the portfolio project:
+
+### 📸 Preview 1  
+![Preview 1](https://drive.google.com/uc?export=view&id=1Rci514lm8SDtuMzKGok5AThr-tfrM4R_)
+
+### 📸 Preview 2  
+![Preview 2](https://drive.google.com/uc?export=view&id=1iuOQZ6n4xYb7M-rFi7va2YcxRqMJcRJ7)
+
+### 📸 Preview 3  
+![Preview 3](https://drive.google.com/uc?export=view&id=1LAJAGvtETIlGLzVBdYo9nQTdouHBG3Y5)
+
+### 📸 Preview 4  
+![Preview 4](https://drive.google.com/uc?export=view&id=1nSUH6dkWs3fFbA_1DtJ2pdo0e3SgSsBN)
+
+### 📸 Preview 5  
+![Preview 5](https://drive.google.com/uc?export=view&id=1mZ5Tbi4QPWQOSCG1AsyZg9J5KrWOwBXe)
+
+### 📸 Preview 6  
+![Preview 6](https://drive.google.com/uc?export=view&id=1rzi8ojC3yw3g7yh0nQMaAamWq4PkGUM4)
+
+### 📸 Preview 7  
+![Preview 7](https://drive.google.com/uc?export=view&id=198mf1iPWfizBGG9ma3xIH68zivxs4IBB)
+
+### 📸 Preview 8  
+![Preview 8](https://drive.google.com/uc?export=view&id=1rOpU-mMooZjFkY1Dd9mzfzMgBrvcYqIe)
+
+### 📸 Preview 9  
+![Preview 9](https://drive.google.com/uc?export=view&id=1bWRPcrXcW0ftVJwrzdAdU8qGOK0PyCx7)
