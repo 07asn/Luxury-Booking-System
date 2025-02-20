@@ -53,7 +53,7 @@ Explore the wireframes and mockups for the project design on Figma:
 ---
 
 ## 📋 Trello Board  
-Track project progress and tasks on Trello:  
+Track project progress and tasks on Trello: 
 👉 [Trello Board](https://trello.com/b/RIH7SYpI/rental-website)
 
 ---
