@@ -59,7 +59,7 @@ Track project progress and tasks on Trello:
 ---
 
 ## 🖼️ Project Preview  
-Below are some screenshots from the portfolio project:
+Below are some screenshots from the project:
 
 ### 📸 Preview 1  
 ![Preview 1](https://drive.google.com/uc?export=view&id=1Rci514lm8SDtuMzKGok5AThr-tfrM4R_)
